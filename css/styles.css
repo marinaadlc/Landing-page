@@ -47,7 +47,7 @@ p {
 
 /* ---- Layout Rules ---- */
 main {
-    margin: 10vh 1em 10vh;
+    margin: 10vh 1em 0vh;
 }
 
 .main-hero {
@@ -70,16 +70,19 @@ a{
     padding-left: 0;
     margin: 0;
     text-align: right;
+    height:60px;
 
     display:flex;
     justify-content: space-around;
-    color:blue;
+    align-items: stretch;
+    color:#13284C;
 }
 
 .navbar__menu li {
-  margin: 20px 0;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   cursor: context-menu;
+  padding:0 5%;
 }
 
 .navbar__menu .menu__link {
@@ -94,6 +97,10 @@ a{
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
+}
+
+.hidden{
+  display:none;
 }
 
 /* Header Styles */
@@ -213,6 +220,24 @@ section.your-active-class .landing__container::before {
 section.your-active-class .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
+}
+
+li.your-active-class{
+  background:#13284C;
+  color:white;
+}
+
+.collapsed{
+  min-height:auto;
+}
+
+/*---------Scroll to top section---------*/
+.scroll-top{
+  text-align: right;
+  position: fixed;
+  width:80px;
+  right:50px;
+  bottom: 50px;
 }
 
 /* Section Active Styles Keyframe Animations */

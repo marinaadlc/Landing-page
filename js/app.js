@@ -18,7 +18,10 @@
  *
 */
 const sections = document.querySelectorAll('section');
+const main = document.querySelector('main');
 const navBar = document.getElementById("navbar__list");
+const header = document.querySelector(".page__header");
+const scrollTop = document.querySelector(".scroll-top");
 const fragment = document.createDocumentFragment();
 
 
@@ -79,6 +82,7 @@ for(let i=0; i<sections.length; i++){
 
   newElement.innerText = sections[i].dataset.nav;
   newElement.href= sections[i].id;
+  newElement.dataset.id = sections[i].id;
 
   fragment.appendChild(newElement);
 }
@@ -86,17 +90,16 @@ navBar.appendChild(fragment);
 
 
 // Add class 'active' to section when near top of viewport
-
-
-// for (int i =0; i<=sections.length, i++){
-//   observer.observe(sections[i]);
-// }
 function changeActive(entries){
   for(const entry of entries){
+    let navEl = document.querySelector('[data-id="'+ entry.target.id+'"]');
+
     if(entry.isIntersecting == true){
       entry.target.classList.add('your-active-class');
+      navEl.classList.add('your-active-class');
     } else {
       entry.target.classList.remove('your-active-class');
+      navEl.classList.remove('your-active-class');
     }
   }
 }
@@ -124,8 +127,45 @@ navBar.addEventListener('click',function(evt){
  *
 */
 
-// Build menu
+// Hide navBar if scroll is stopped
+let scrolling;
 
-// Scroll to section on link click
+window.addEventListener('scroll',function(event){ /*listen for scroll events*/
 
-// Set sections as active
+  // hide navBar if scrolling is stopped
+  window.clearTimeout(scrolling); /*clear timeout during scroll*/
+
+  header.classList.remove('hidden'); /*remove hidden class*/
+
+  scrolling = setTimeout(function(){
+    header.classList.add('hidden');
+  }, 1000);
+
+  // show scroll-to-top arrow when scroll is past vh
+  if (window.scrollY > window.innerHeight){
+    scrollTop.classList.remove('hidden');
+  } else{
+    scrollTop.classList.add('hidden');
+  }
+
+}, false) /*listen in capture state, not in bubbling*/
+
+// scroll to top when button is clicked
+scrollTop.addEventListener('click', function(){
+  window.scrollTo({
+    top:0,
+    left:0,
+    behavior:'smooth'
+  });
+});
+
+// make sections collapsible
+main.addEventListener('click',function(event){
+  let clicked = event.target.closest('section');
+  console.log(clicked);
+  let contents = clicked.getElementsByTagName('p');
+  for (content of contents){
+    content.classList.toggle('hidden');
+  }
+  clicked.classList.toggle('collapsed');
+}, false);
