@@ -3,7 +3,7 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
-* [Description of functionalities](#Description of functionalities)
+* Description of functionalities
 
 ## Instructions
 
